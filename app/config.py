@@ -8,7 +8,7 @@ import os
 load_dotenv()
 
 # Configuración de MongoDB
-MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/tu_basededatos")
+MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/padonde")
 JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "default_jwt_token")
 
 # Configuración de Twilio
@@ -36,6 +36,7 @@ from app.routes.ratings import rating_bp
 from app.routes.business import business_bp
 from app.routes.categories import category_bp
 from app.routes.reservations import reservation_bp
+from app.routes.places import places_bp
 
 app.register_blueprint(auth_bp, url_prefix="/api/auth")
 app.register_blueprint(roles_bp, url_prefix="/api/roles")
@@ -45,6 +46,7 @@ app.register_blueprint(rating_bp, url_prefix="/api/ratings")
 app.register_blueprint(business_bp, url_prefix="/api/business")
 app.register_blueprint(category_bp, url_prefix="/api/categories")
 app.register_blueprint(reservation_bp, url_prefix="/api/reservations")
+app.register_blueprint(places_bp, url_prefix="/api/places")
 
 # Ruta por defecto
 @app.route('/')
