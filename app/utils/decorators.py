@@ -1,7 +1,7 @@
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask import jsonify
 from bson import ObjectId
-from app import mongo 
+from app.config import mongo
 
 def role_required(permission):
     """

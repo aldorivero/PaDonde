@@ -1,4 +1,5 @@
 from bson import ObjectId
+from app.config import mongo
 from pymongo.collection import Collection
 
 class Business:
@@ -31,3 +32,19 @@ class Business:
         """Eliminar un negocio"""
         result = collection.delete_one({"_id": ObjectId(business_id)})
         return result.deleted_count
+
+
+    @staticmethod
+    def get_nearby_businesses(lat, lon, category, max_distance=5000):
+        return mongo.db.businesses.find({
+            "category": category,
+            "location": {
+                "$near": {
+                    "$geometry": {
+                        "type": "Point",
+                        "coordinates": [lon, lat]
+                    },
+                    "$maxDistance": max_distance
+                }
+            }
+        })
