@@ -50,3 +50,19 @@ def delete_business(business_id):
         return jsonify({"error": "Business not found"}), 404
     return jsonify({"message": "Business deleted successfully"}), 200
 
+@business_bp.route("/nearby", methods=["GET"])
+def get_nearby_businesses():
+    lat = float(request.args.get("lat", 0))
+    lon = float(request.args.get("lon", 0))
+    category = request.args.get("category", "")
+    max_distance = int(request.args.get("max_distance", 5000))
+
+    businesses = Business.get_nearby_businesses(lat, lon, category, max_distance)
+
+    results = []
+    for business in businesses:
+        business["_id"] = str(business["_id"])
+        results.append(business)
+
+    return jsonify(results), 200
+

@@ -8,7 +8,7 @@ import os
 load_dotenv()
 
 # Configuración de MongoDB
-MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/tu_basededatos")
+MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/padonde")
 JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "default_jwt_token")
 
 # Configuración de Twilio
