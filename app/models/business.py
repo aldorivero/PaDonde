@@ -37,7 +37,7 @@ class Business:
     @staticmethod
     def get_nearby_businesses(lat, lon, category, max_distance=5000):
         return mongo.db.businesses.find({
-            "category": category,
+            "categories": {"$in": [category]},
             "location": {
                 "$near": {
                     "$geometry": {
