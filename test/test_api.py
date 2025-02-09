@@ -1,4 +1,5 @@
 import unittest
+import json
 from app.config import app, mongo
 from bson import ObjectId
 
@@ -57,6 +58,8 @@ class BusinessTestCase(unittest.TestCase):
         self.businesses.insert_one(self.test_business)
 
         response = self.client.get("/api/business/nearby?lat=40.7128&lon=-74.0060&category=Cafetería&max_distance=5000")
+        print("Response JSON:\n", json.dumps(response.json, indent=4, ensure_ascii=False))  # Agregar depuración
+
         self.assertEqual(response.status_code, 200)
         self.assertGreater(len(response.json), 0)
 
